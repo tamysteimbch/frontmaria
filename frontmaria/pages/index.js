@@ -1,19 +1,30 @@
 import Head from 'next/head';
 import Layout, { siteTitle } from '../components/layout';
+import Modal from "../components/Modal";
+import {useState} from "react";
 import utilStyles from '../styles/utils.module.css';
+import Link from 'next/link';
 
 export default function Home() {
+
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
+      <Link href="/pages/loginProf"> login prof</Link>
       <section className={utilStyles.headingMd}>
-        <p>[Your Self Introduction]</p>
-        <p>
-          (This is a sample website - you’ll be building a site like this on{' '}
-          <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
-        </p>
+        <div id="modal-root">
+        <p>[botao modalzinha]</p>
+        <button onClick={() => setShowModal(true)}>Open Modal</button>
+        {showModal &&
+            <Modal onClose={() => setShowModal(false)}>
+                Hello from the modal!
+            </Modal>
+        }
+      </div>
       </section>
     </Layout>
   );
